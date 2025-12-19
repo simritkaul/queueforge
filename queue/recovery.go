@@ -7,7 +7,7 @@ import (
 )
 
 // Handler to update jobs and pending in Recovery
-func (q *Queue) applyWALRecord(record *WALRecord) error {
+func (q *Queue) applyWALRecord(record WALRecord) error {
 	q.mu.Lock();
 	defer q.mu.Unlock();
 
