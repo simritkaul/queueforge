@@ -16,6 +16,8 @@ type Queue struct {
 	mu sync.Mutex;
 }
 
+var ErrEmpty = errors.New("queue is empty")
+
 // Initialises a new Queue
 func NewQueue (wal *WAL) (*Queue, error) {
 	q := &Queue{
@@ -81,7 +83,7 @@ func (q *Queue) Dequeue () (*Job, error) {
 
 	// If no pending jobs available
 	if len(q.pending) == 0 {
-		return nil, errors.New("no jobs available");
+		return nil, ErrEmpty;
 	}
 
 	// Pop from the pending queue
